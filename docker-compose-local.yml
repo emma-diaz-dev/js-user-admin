@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - '5050:5050'
+    networks:
+      - local-net
+    env_file:
+      - .local.env
+    depends_on:
+      - mongo
+    links:
+      - mongo
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    logging:
+      driver: none
+    networks:
+      - local-net
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
+networks:
+    local-net:
+      name: local-net
+      driver: bridge

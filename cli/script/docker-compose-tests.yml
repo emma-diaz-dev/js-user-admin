@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  script:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    env_file:
+      - env.yml
+    networks:
+      - local-net
+
+networks:
+    local-net:
+        name: local-net
+        driver: bridge
