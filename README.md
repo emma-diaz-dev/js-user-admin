@@ -51,3 +51,8 @@ make app
 ```
 
 After that we can check logs in the next url http://localhost:5601
+
+
+
+
+Documentation: http://localhost:5050/docs
