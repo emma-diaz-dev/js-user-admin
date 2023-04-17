@@ -41,7 +41,7 @@ export class AppController {
   @UseInterceptors(FileInterceptor('file'))
   @Bind(UploadedFile(),Param(),Body())
   updateUser(file,params,user:UpdateUser):Promise<Object>{
-    if (file.size != 0){
+    if (file && file.size != 0){
       user.picture = file
     }
     return this.appService.updateUser(params.id,user)

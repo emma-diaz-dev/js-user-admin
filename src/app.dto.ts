@@ -1,6 +1,7 @@
 import { IsNotEmpty } from 'class-validator';
 import { Schema,Types, model } from 'mongoose';
 import { Logger } from 'winston';
+import { ApiProperty } from '@nestjs/swagger';
 
 interface IUser {
     name: string;
@@ -18,10 +19,14 @@ const UserModel = model<IUser>('User',userSchema)
 
 export class User {
     private logger:Logger;
+    @ApiProperty({ example: 1, description: 'the id of the user' })
     id: string;
     @IsNotEmpty()
+    @ApiProperty({ example: 'Emmanuel', description: 'the name of the user' })
     name: string;
+    @ApiProperty({ example: 'Diaz', description: 'the last name of the user' })
     last_name: string;
+    @ApiProperty({ example: 'Alberto Durrieu 2486, Córdoba, Argentina', description: 'The address of the user' })
     address: string;
     picture: File;
     constructor(logger?,name?,last_name?,address?,picture?){
@@ -85,9 +90,13 @@ export class User {
 
 export class UpdateUser {
     private logger?:Logger;
+    @ApiProperty({ example: 1, description: 'the id of the user' })
     id?: string;
+    @ApiProperty({ example: 'Emmanuel', description: 'the name of the user' })
     name?: string;
+    @ApiProperty({ example: 'Diaz', description: 'the last name of the user' })
     last_name?: string;
+    @ApiProperty({ example: 'Alberto Durrieu 2486, Córdoba, Argentina', description: 'The address of the user' })
     address?: string;
     picture?: File;
     constructor(logger?,name?,last_name?,address?,picture?){
